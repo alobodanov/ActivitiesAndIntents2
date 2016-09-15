@@ -15,6 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".econdActivity">
+            <intent-filter>
+                <action android:name="com.seneca.lab2b.artem" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ThirdActivity"></activity>
     </application>
 
 </manifest>

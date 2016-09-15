@@ -18,10 +18,44 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Message"
-        android:id="@+id/messageButton"
+        android:text="act 2"
+        android:id="@+id/a2_button"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="26dp"
         android:layout_marginTop="25dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACT 3"
+        android:id="@+id/a3_button"
+        android:layout_below="@+id/a2_button"
+        android:layout_alignStart="@+id/a2_button"
+        android:layout_marginTop="36dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/name"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/a3_button"
+        android:text="My name"
+        android:textColor="@color/abc_search_url_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/number"
+        android:layout_below="@+id/name"
+        android:layout_alignStart="@+id/name"
+        android:layout_marginTop="36dp"
+        android:digits="0123456789."
+        android:inputType="numberDecimal"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/abc_floating_window_z" />
+
 </RelativeLayout>

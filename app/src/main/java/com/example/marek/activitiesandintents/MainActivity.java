@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String name = b.getString("Artem");
                 Bundle boundle = new Bundle();
-                
+
                 boundle.putString("UserName", name);
                 boundle.putInt("UserId", 123456);
 
