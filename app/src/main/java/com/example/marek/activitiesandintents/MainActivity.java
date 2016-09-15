@@ -42,20 +42,18 @@ public class MainActivity extends AppCompatActivity {
         msgButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //when sending an implisit intente use the Intent(context,Intext); constructor
-                //Intent msg_intent = new Intent(v.getContext(), ThirdActivity.class);
+                Intent msg_intent = new Intent(v.getContext(), ThirdActivity.class);
                 Intent i = new Intent(v.getContext(), ThirdActivity.class);
                 //TextView stdName = (TextView) findViewById(R.id.studentName);
 
-                Bundle b = getIntent().getExtras();
+                Bundle b = new Bundle();
+                b.putString("Name","Artem");
+                b.putInt("UserId", 123456);
+                msg_intent.putExtra("Bundle", b );
+                msg_intent.putExtra("greeting","Hello person");
+                msg_intent.putExtra("num",123);
 
-                String name = b.getString("Artem");
-                Bundle boundle = new Bundle();
-
-                boundle.putString("UserName", name);
-                boundle.putInt("UserId", 123456);
-
-                i.putExtras(boundle);
-                startActivity(i);
+                startActivityForResult(msg_intent,2);
 
 
 
