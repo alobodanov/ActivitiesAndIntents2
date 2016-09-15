@@ -1,10 +1,17 @@
 package com.example.marek.activitiesandintents;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,23 +21,78 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //once the activity is created let's assign some code to the Button when it is clicked
-        Button msgButton = (Button)findViewById(R.id.a2_button);
+        Button msgButton = (Button) findViewById(R.id.a2_button);
         //assign code to the onClickListener by defining
         //an anonymous subclass of OnClickListener and overriding its onClickMethod
         //notice here we are calling new and passing the created OnClickListener to the "setOnClickListener" method instead of storing the reference as a variable
         //while at the same time overriding the onClick method. This is a common pattern seen in Java "in the wild"
-        msgButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        msgButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 //in this example we will use the button to send a message
                 //let's create an intent
                 Intent msg_intent = new Intent("com.seneca.lab2b.artem");
-                //add some extra information to the intent
-                //msg_intent.putExtra(Intent.EXTRA_TEXT, "This is my message blah blah blah");
-                //msg_intent.setType("text/plain"); //describes the MIME type of the content
-                // fire off the intent
-                startActivity(msg_intent);
+                //start activity for result expects both an intent and a request code so that you can match up the request with the reply
+                //fro now keep things simple with a literal number of owr request
+                startActivityForResult(msg_intent, 1);
             }
         });
+
+
+        Button msgButton3 = (Button) findViewById(R.id.a3_button);
+        msgButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //when sending an implisit intente use the Intent(context,Intext); constructor
+                //Intent msg_intent = new Intent(v.getContext(), ThirdActivity.class);
+                Intent i = new Intent(v.getContext(), ThirdActivity.class);
+                //TextView stdName = (TextView) findViewById(R.id.studentName);
+
+                Bundle b = getIntent().getExtras();
+
+                String name = b.getString("Artem");
+                Bundle boundle = new Bundle();
+                
+                boundle.putString("UserName", name);
+                boundle.putInt("UserId", 123456);
+
+                i.putExtras(boundle);
+                startActivity(i);
+
+
+
+
+                //TextView nameUser = (TextView) findViewById(R.id.studentName);
+
+
+                //startActivity(msg_intent);
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String result = "RESULT NOT SET";
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                result = data.getStringExtra("message");
+            } else if(requestCode == Activity.RESULT_CANCELED){
+                result = "user canselled";
+            }
+        } else {
+            Log.e("Lab2", "SOMETHIGN WHENT WRONG");
+
+        }
+        TextView text = (TextView) findViewById(R.id.textView);
+        text.setText(result);
+
+        Context context = getApplicationContext();
+        CharSequence toast_text = "u r cool! " + result;
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, toast_text, duration);
+        toast.show();
 
 
 
